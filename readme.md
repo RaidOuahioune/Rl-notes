@@ -1,8 +1,3 @@
-<script
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  type="text/javascript">
-</script>
-
 # 1. The diffrence between the State value function  and the total  Rewards :
 
 ##  The total rewards R:
@@ -39,7 +34,7 @@ So in other words to get the best policy for the current state we need to start 
 
 And hence the optimal policy will be the policy that chooses the action a such that 
 
-$$ V^*(S_{t-1})=max_{a}\{ r(S_{t-1},a)+ \gamma V^*(S_{t})\}$$
+$$ V^\*(S_{t-1})=max_{a}\{ r(S_{t-1},a)+ \gamma V^\*(S_{t})\}$$
 
 And hence by the recursive defintion we move backward to the current state
 
@@ -64,13 +59,13 @@ And hence by the recursive defintion we move backward to the current state
 ### The Value iteration method :
 
     We intiate all state values with zero or using random values 
-1 .$$ \forall s\in S : V(s)=0$$
+1 . $$\forall s \in S  V(s)=0$$
 
-2. We iterate until $$V_{i}(s)\space converges \space to \space V^*(s) \space \forall s \in S \space \forall i > t \space  where \space t \space denotes \space  the  \space time \space  of \space  convergence    $$
+2. We iterate until $$V_{i}(s)\space converges \space to \space V^\*(s) \space \forall s \in S \space \forall i > t \space  where \space t \space denotes \space  the  \space time \space  of \space  convergence$$
 
 The forumala (The Update rule for a fixed state accross one iteration to the next ) can be written as follows:
 
-$$ V_{i+1}(s)= \max_{a \in \space Actions(s)}( \sum_{s` \in PossibleStates(s) }T(s,a,s`)(r(s,a,s`)+ \gamma V_{i}(s))$$
+$$V_{i+1}(s)= \max_{a \in \space Actions(s)}( \sum_{s\` \in PossibleStates(s) }T(s,a,s\`)(r(s,a,s\`)+ \gamma V_{i}(s))$$
 
 2. A basic example:
 
@@ -101,10 +96,9 @@ After some iterations here are the updated values <br>
 #### Policy evaluation method:
 
    We intiate all state values with zero or using random values <br>
-1 .$$ \forall s\in S : V_{\pi}(s)=0$$
+1 . $$\forall s\in S : V_{\pi}(s)=0$$
 
-2. The update rule:
-$$ V_{i=1}^{\pi} (S)= \sum_{ s` \in PossibleStates(S)}T(S,\pi(S),s`)\space [R(\space S,\pi(S),s` \space)+ \gamma V^{\pi}_{i}(s`)]$$
+2. The update rule: $$V_{i=1}^{\pi} (S)= \sum_{ s\` \in PossibleStates(S)}T(S,\pi(S),s\`)\space (R(\space S,\pi(S),s\` \space)+ \gamma V^{\pi}_{i}(s\`))$$
 
     As u can see there no maximization here and we just compute the evaluation of a state in a naive way based on the action given by the policy 
 
@@ -116,11 +110,11 @@ $$ \forall \pi^k \in \prod do :$$
 
 Iterate simplified belleman update until values converges for all states given that fixed.<br> $$\pi^k  \space as \space follows:$$
 
-$$V_{i+1}^{\pi_{k}}(s) \leftarrow \sum_{s`}P(s`|s,\pi_{k}(s))\space [\space R(s,\pi_{k}(s),s`) + \space \gamma V_{i}^{\pi_{k}}(s`)]$$
+$$V_{i+1}^{\pi_{k}}(s) \leftarrow \sum_{s\`}P(s\`|s,\pi_{k}(s))\space (\space R(s,\pi_{k}(s),s\`) + \space \gamma V_{i}^{\pi_{k}}(s\`))$$
 
 After the values convergence we update the fixed policy as given in this formula
 
-$$ \pi_{k+1}(s)=\argmax_{a}\sum_{s`}P(s`|s,\pi_{k}(s))\space [\space R(s,\pi_{k}(s),s`) + \space \gamma V_{i}^{\pi_{k}}(s`)]$$
+$$ \pi_{k+1}(s)= argmax_{a}\sum_{s\`}P(s\`|s,\pi_{k}(s))\space (\space R(s,\pi_{k}(s),s\`) + \space \gamma V_{i}^{\pi_{k}}(s\`))$$
 
 
     Here in other words the new policy will learn from the progess of the current policy values computation.
